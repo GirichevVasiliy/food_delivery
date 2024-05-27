@@ -30,7 +30,7 @@ class _MainFoodPageState extends State<MainFoodPage> {
                    Row(
                      children: [
                        SmallText(text: "Tymen", color: Colors.black54),
-                       Icon(Icons.arrow_drop_down_rounded)
+                       Icon(Icons.arrow_drop_down_rounded) // Стрелка рядом с текстом Тюмень
                      ],
                    )
                   ],
