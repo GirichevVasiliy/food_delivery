@@ -13,8 +13,10 @@ class Dimensions {
   static double height10 = screenHeight / 84.4; // screenHeight к примеру 844 / 10
   static double height15 = screenHeight / 56.27;
   static double height20 = screenHeight / 42.2;
+  static double height24 = screenHeight / 35.17;
   static double height30 = screenHeight / 28.13;
   static double height45 = screenHeight / 18.76;
+  static double height120 = screenHeight / 7.04;
 
   // Динамический Fonts
   static double font20 = screenHeight / 42.2;
@@ -32,4 +34,8 @@ class Dimensions {
   static double width20 = screenHeight / 42.2;
   static double width30 = screenHeight / 28.13;
   static double width45 = screenHeight / 18.76;
+
+  // icon Size
+  static double iconSize24 = screenHeight / 35.17;
+  static double iconSize30 = screenHeight / 28.13;
 }

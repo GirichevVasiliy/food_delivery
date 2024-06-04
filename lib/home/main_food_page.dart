@@ -41,7 +41,7 @@ class _MainFoodPageState extends State<MainFoodPage> {
                   child: Container(
                     width: Dimensions.width45,
                     height: Dimensions.height45,
-                    child: Icon(Icons.search, color: Colors.white),
+                    child: Icon(Icons.search, color: Colors.white, size: Dimensions.iconSize30),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(Dimensions.radius15),
                       color: AppColors.mainColor,
@@ -53,7 +53,9 @@ class _MainFoodPageState extends State<MainFoodPage> {
           ),
         ),
         // Тело страницы
-        FoodPageBody(),
+        Expanded(child: SingleChildScrollView(
+          child: FoodPageBody(),
+        ))
       ],
     ));
   }
