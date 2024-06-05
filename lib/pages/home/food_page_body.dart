@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:food_delivery/utils/colors.dart';
 import 'package:food_delivery/utils/dimensions.dart';
+import 'package:food_delivery/widgets/app_column.dart';
 import 'package:food_delivery/widgets/big_text.dart';
 import 'package:food_delivery/widgets/icon_and_text_widget.dart';
 import 'package:food_delivery/widgets/small_text.dart';
@@ -224,62 +225,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   ]),
               child: Container(
                 padding: EdgeInsets.only(top: Dimensions.height15, left: Dimensions.height15, right: Dimensions.height15),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    BigText(text: "Chinese Side"),
-                    SizedBox(
-                      height: Dimensions.height10,
-                    ),
-                    Row(
-                      //Ряд со звездами
-                      children: [
-                        Wrap(
-                          children: List.generate(5, (index) {
-                            // количество звезд
-                            return Icon(
-                              Icons.star,
-                              color: AppColors.mainColor,
-                              size: Dimensions.height15,
-                            );
-                          }),
-                        ),
-                        SizedBox(
-                          width: Dimensions.width7,
-                        ),
-                        SmallText(text: "4.5"),
-                        SizedBox(
-                          width: Dimensions.width20,
-                        ),
-                        SmallText(text: "1234"),
-                        SizedBox(
-                          width: Dimensions.width7,
-                        ),
-                        SmallText(text: "comments")
-                      ],
-                    ), //Ряд со звездами
-                    SizedBox(
-                      height: Dimensions.height20,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween, // одинаковое расстояние
-                      children: [
-                        IconAndTextWidget(
-                            icon: Icons.circle_sharp,
-                            text: "Normal",
-                            iconColor: AppColors.iconColor1),
-                        IconAndTextWidget(
-                            icon: Icons.location_on,
-                            text: "1,7 km",
-                            iconColor: AppColors.mainColor),
-                        IconAndTextWidget(
-                            icon: Icons.access_time_rounded,
-                            text: "Normal",
-                            iconColor: AppColors.iconColor2),
-                      ],
-                    )
-                  ],
-                ),
+                child: AppColumn(text: "Chinese side", fontSize: Dimensions.font20)
               ),
             ),
           )

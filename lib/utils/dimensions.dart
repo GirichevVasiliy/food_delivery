@@ -19,6 +19,7 @@ class Dimensions {
 
   // Динамический Fonts
   static double font20 = screenHeight / 42.2;
+  static double font26 = screenHeight / 32.46;
   static double font12 = screenHeight / 70.33;
 
   // Динамический Radius
@@ -37,11 +38,12 @@ class Dimensions {
   // icon Size
   static double iconSize24 = screenHeight / 35.17;
   static double iconSize30 = screenHeight / 28.13;
+  static double iconSize16 = screenHeight / 52.75;
 
   static double listViewSize = screenWidth / 3.25; // 390/120
   static double listViewTextContSize = screenWidth / 3.90; // 390/100
 
 // Популярная еда
   static double popularFoodImgSize = screenHeight / 2.10;
-
+  //static double popularFoodImgSize = screenHeight / 2.10;
 }
