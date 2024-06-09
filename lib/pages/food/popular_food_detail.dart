@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/utils/colors.dart';
 import 'package:food_delivery/utils/dimensions.dart';
 import 'package:food_delivery/widgets/app_column.dart';
 import 'package:food_delivery/widgets/app_icon.dart';
+import 'package:food_delivery/widgets/big_text.dart';
 
 class PopularFoodDetail extends StatelessWidget {
   const PopularFoodDetail({super.key});
@@ -9,6 +11,7 @@ class PopularFoodDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Stack(
         children: [
           Positioned(
@@ -50,14 +53,65 @@ class PopularFoodDetail extends StatelessWidget {
                       ),
                       color: Colors.white),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       AppColumn(
                         text: "Chinese Side",
                         fontSize: Dimensions.font26,
-                      )
+                      ),
+                      SizedBox(
+                        height: Dimensions.height20,
+                      ),
+                      BigText(text: "Introduce")
                     ],
                   )))
         ],
+      ),
+      bottomNavigationBar: Container(
+        height: Dimensions.bottomHighBar,
+        padding: EdgeInsets.only(
+            top: Dimensions.height30,
+            bottom: Dimensions.height30,
+            left: Dimensions.width20,
+            right: Dimensions.width20),
+        decoration: BoxDecoration(
+          color: AppColors.buttonBackGroundColor,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(Dimensions.radius20),
+            topRight: Radius.circular(Dimensions.radius20),
+          )
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            // Виджет количества, добавления и удаления блюда
+            Container(
+             padding: EdgeInsets.only(top: Dimensions.height20, bottom: Dimensions.height20, left: Dimensions.width20, right: Dimensions.width20), // Расширили границы области виджета
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(Dimensions.radius20),
+                color: Colors.white
+              ),
+              child: Row(
+                children: [
+                  Icon(Icons.remove, color: AppColors.singColor,),
+                  SizedBox(width: Dimensions.width10,),
+                  BigText(text: "0", size: Dimensions.font18,),
+                  SizedBox(width: Dimensions.width10,),
+                  Icon(Icons.add, color: AppColors.singColor,)
+                ],
+              ),
+            ),
+            // Виджет стоимости
+            Container(
+              padding: EdgeInsets.only(top: Dimensions.height20, bottom: Dimensions.height20, left: Dimensions.width20, right: Dimensions.width20),
+              child: BigText(text: "\$10 | Add to cart", color: Colors.white, size: Dimensions.font18,),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(Dimensions.radius20),
+                color: AppColors.mainColor
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
