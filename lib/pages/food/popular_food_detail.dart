@@ -14,6 +14,7 @@ class PopularFoodDetail extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Stack(
         children: [
+          // Background image
           Positioned(
               left: 0,
               right: 0,
@@ -25,6 +26,7 @@ class PopularFoodDetail extends StatelessWidget {
                         fit: BoxFit.cover,
                         image: AssetImage("assets/image/food_10.png"))),
               )),
+          // Icon widgets
           Positioned(
               top: Dimensions.height45,
               left: Dimensions.width20,
@@ -36,6 +38,7 @@ class PopularFoodDetail extends StatelessWidget {
                   AppIcon(icon: Icons.shopping_cart_outlined)
                 ],
               )),
+          // Interaction of food
           Positioned(
               left: 0,
               right: 0,
@@ -65,8 +68,11 @@ class PopularFoodDetail extends StatelessWidget {
                       BigText(text: "Introduce")
                     ],
                   )))
+          // Expandable text widget
+
         ],
       ),
+      // Bottom navigator bar
       bottomNavigationBar: Container(
         height: Dimensions.bottomHighBar,
         padding: EdgeInsets.only(
