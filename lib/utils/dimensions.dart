@@ -51,7 +51,7 @@ class Dimensions {
 
 // Популярная еда
   static double popularFoodImgSize = screenHeight / 2.10;
-  //static double popularFoodImgSize = screenHeight / 2.10;
+  static double recommendedFoodImgSize = screenHeight / 2.81;
 
 // Bottom high
   static double bottomHighBar = screenHeight / 7.03;
