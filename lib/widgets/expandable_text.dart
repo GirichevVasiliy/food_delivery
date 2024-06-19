@@ -47,8 +47,8 @@ class _ExpandableTextWidgetState extends State<ExpandableTextWidget> {
                     text: hiddenText
                         ? (firstHalf + "...")
                         : (firstHalf + secondHalf),
-                    size: hiddenText ? Dimensions.font14 : Dimensions.font16,
-                height: Dimensions.height1_3,
+                    size: Dimensions.font16,
+                height: Dimensions.height1_5,
                   color: AppColors.paraColor,),
                 InkWell(
                   onTap: () {
