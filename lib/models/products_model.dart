@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class Product {
   int? _totalSize;
   int? _typeId;
@@ -15,7 +17,7 @@ class Product {
   Product.fromJson(Map<String, dynamic> json) {
     _totalSize = json['total_size'];
     _typeId = json['type_id'];
-    _offset = json['offset'];
+    _offset = json['off_set'];
     if (json['products'] != null) {
       _products = <ProductModel>[];
       json['products'].forEach((v) {
@@ -61,5 +63,4 @@ class ProductModel {
     updatedAt = json['updated_at'];
     typeId = json['type_id'];
   }
-
 }
