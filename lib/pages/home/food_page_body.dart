@@ -1,6 +1,7 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/controllers/popular_product_controller.dart';
+import 'package:food_delivery/controllers/recommended_product_controller.dart';
 import 'package:food_delivery/utils/colors.dart';
 import 'package:food_delivery/utils/dimensions.dart';
 import 'package:food_delivery/widgets/app_column.dart';
@@ -48,7 +49,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
       children: [
         // 1. Секция слайдера - карусели
         GetBuilder<PopularProductController>(builder: (popularProduct) {
-          return Container(
+          return popularProduct.isLoad ? Container(
             //color: Colors.red,
             height: Dimensions.pageView,
             child: PageView.builder(
@@ -56,15 +57,20 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                 itemCount: popularProduct.popularProductList.length,
                 // количество элементов
                 itemBuilder: (context, position) {
-                  return _buildPageItem(position, popularProduct.popularProductList[position]);
+                  return _buildPageItem(
+                      position, popularProduct.popularProductList[position]);
                 }),
+          ) : CircularProgressIndicator(
+            color: AppColors.mainColor,
           );
         }),
 
         // 2. Секция точек под каруселью
         GetBuilder<PopularProductController>(builder: (popularProduct) {
           return DotsIndicator(
-            dotsCount: popularProduct.popularProductList.isNotEmpty ? popularProduct.popularProductList.length : 1, // количество точек снизу
+            dotsCount: popularProduct.popularProductList.isNotEmpty
+                ? popularProduct.popularProductList.length
+                : 1, // количество точек снизу
             position: _currPageValue,
             decorator: DotsDecorator(
               activeColor: AppColors.mainColor,
@@ -85,7 +91,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              BigText(text: "Popular"),
+              BigText(text: "Recommended"),
               SizedBox(
                 width: Dimensions.width10,
               ),
@@ -105,84 +111,86 @@ class _FoodPageBodyState extends State<FoodPageBody> {
         ),
 
         // 4. Список популярной еды
-        ListView.builder(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: 10, //Количество элементов
-            itemBuilder: (context, index) {
-              return Container(
-                margin: EdgeInsets.only(
-                    left: Dimensions.width20,
-                    right: Dimensions.width20,
-                    bottom: Dimensions.height10),
-                child: Row(
-                  children: [
-                    // Картинка малая
-                    Container(
-                      width: Dimensions.listViewSize,
-                      height: Dimensions.listViewSize,
-                      decoration: BoxDecoration(
-                        borderRadius:
-                            BorderRadius.circular(Dimensions.radius20),
-                        color: Colors.white38,
-                        image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage("assets/image/food_3.jpg")),
-                      ),
-                    ),
-                    // Текстовый контейнер
-                    Expanded(
-                      child: Container(
-                        height: Dimensions.listViewTextContSize,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(Dimensions.radius20),
-                            bottomRight: Radius.circular(Dimensions.radius20),
-                          ),
-                          color: Colors.white,
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                              left: Dimensions.width10,
-                              right: Dimensions.width10),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              BigText(text: "Nutritious meal in China"),
-                              SizedBox(
-                                height: Dimensions.height10,
-                              ),
-                              SmallText(text: "With chinese characteristics"),
-                              SizedBox(
-                                height: Dimensions.height10,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment
-                                    .spaceBetween, // одинаковое расстояние
-                                children: [
-                                  IconAndTextWidget(
-                                      icon: Icons.circle_sharp,
-                                      text: "Normal",
-                                      iconColor: AppColors.iconColor1),
-                                  IconAndTextWidget(
-                                      icon: Icons.location_on,
-                                      text: "1,7 km",
-                                      iconColor: AppColors.mainColor),
-                                  IconAndTextWidget(
-                                      icon: Icons.access_time_rounded,
-                                      text: "Normal",
-                                      iconColor: AppColors.iconColor2),
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              );
-            }),
+       GetBuilder<RecommendedProductController>(builder: (recommendedProduct){
+         return  ListView.builder(
+             physics: NeverScrollableScrollPhysics(),
+             shrinkWrap: true,
+             itemCount: 10, //Количество элементов
+             itemBuilder: (context, index) {
+               return Container(
+                 margin: EdgeInsets.only(
+                     left: Dimensions.width20,
+                     right: Dimensions.width20,
+                     bottom: Dimensions.height10),
+                 child: Row(
+                   children: [
+                     // Картинка малая
+                     Container(
+                       width: Dimensions.listViewSize,
+                       height: Dimensions.listViewSize,
+                       decoration: BoxDecoration(
+                         borderRadius:
+                         BorderRadius.circular(Dimensions.radius20),
+                         color: Colors.white38,
+                         image: DecorationImage(
+                             fit: BoxFit.cover,
+                             image: AssetImage("assets/image/food_3.jpg")),
+                       ),
+                     ),
+                     // Текстовый контейнер
+                     Expanded(
+                       child: Container(
+                         height: Dimensions.listViewTextContSize,
+                         decoration: BoxDecoration(
+                           borderRadius: BorderRadius.only(
+                             topRight: Radius.circular(Dimensions.radius20),
+                             bottomRight: Radius.circular(Dimensions.radius20),
+                           ),
+                           color: Colors.white,
+                         ),
+                         child: Padding(
+                           padding: EdgeInsets.only(
+                               left: Dimensions.width10,
+                               right: Dimensions.width10),
+                           child: Column(
+                             crossAxisAlignment: CrossAxisAlignment.start,
+                             children: [
+                               BigText(text: "Nutritious meal in China"),
+                               SizedBox(
+                                 height: Dimensions.height10,
+                               ),
+                               SmallText(text: "With chinese characteristics"),
+                               SizedBox(
+                                 height: Dimensions.height10,
+                               ),
+                               Row(
+                                 mainAxisAlignment: MainAxisAlignment
+                                     .spaceBetween, // одинаковое расстояние
+                                 children: [
+                                   IconAndTextWidget(
+                                       icon: Icons.circle_sharp,
+                                       text: "Normal",
+                                       iconColor: AppColors.iconColor1),
+                                   IconAndTextWidget(
+                                       icon: Icons.location_on,
+                                       text: "1,7 km",
+                                       iconColor: AppColors.mainColor),
+                                   IconAndTextWidget(
+                                       icon: Icons.access_time_rounded,
+                                       text: "Fast",
+                                       iconColor: AppColors.iconColor2),
+                                 ],
+                               )
+                             ],
+                           ),
+                         ),
+                       ),
+                     )
+                   ],
+                 ),
+               );
+             });
+       })
       ],
     );
   }
@@ -229,7 +237,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                 color: index.isEven ? Color(0xFF69c5df) : Color(0xFF9294cc),
                 image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: AssetImage(popularProduct.img!))),...
+                    image: NetworkImage(popularProduct.img!))),
           ),
           Align(
             alignment: Alignment.bottomCenter,
@@ -257,7 +265,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                       left: Dimensions.height15,
                       right: Dimensions.height15),
                   child: AppColumn(
-                      text: "Chinese side", fontSize: Dimensions.font20)),
+                      text: popularProduct.name!, fontSize: Dimensions.font20, stars: popularProduct.stars!)),
             ),
           )
         ],

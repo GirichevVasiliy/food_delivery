@@ -63,6 +63,7 @@ class PopularFoodDetail extends StatelessWidget {
                       AppColumn(
                         text: "Chinese Side",
                         fontSize: Dimensions.font26,
+                        stars: 1,
                       ),
                       SizedBox(
                         height: Dimensions.height20,

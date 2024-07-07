@@ -11,8 +11,9 @@ import 'icon_and_text_widget.dart';
 
 class AppColumn extends StatelessWidget {
   final String text;
+  final int stars;
   final double fontSize;
-  const AppColumn({super.key, required this.text, required this.fontSize});
+  const AppColumn({super.key, required this.text, required this.fontSize, required this.stars});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class AppColumn extends StatelessWidget {
           //Ряд со звездами
           children: [
             Wrap(
-              children: List.generate(5, (index) {
+              children: List.generate(stars, (index) {
                 // количество звезд
                 return Icon(
                   Icons.star,
@@ -39,7 +40,7 @@ class AppColumn extends StatelessWidget {
             SizedBox(
               width: Dimensions.width7,
             ),
-            SmallText(text: "4.5"),
+            SmallText(text: stars.toString()),
             SizedBox(
               width: Dimensions.width20,
             ),
