@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/controllers/popular_product_controller.dart';
 import 'package:food_delivery/pages/home/main_food_page.dart';
 import 'package:food_delivery/routes/route_helper.dart';
 import 'package:food_delivery/utils/colors.dart';
@@ -11,10 +12,12 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 class PopularFoodDetail extends StatelessWidget {
-  const PopularFoodDetail({super.key});
+  int pageId;
+   PopularFoodDetail({super.key, required this.pageId});
 
   @override
   Widget build(BuildContext context) {
+    var product = Get.find<PopularProductController>().popularProductList[pageId];
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -26,10 +29,10 @@ class PopularFoodDetail extends StatelessWidget {
               child: Container(
                 width: double.maxFinite,
                 height: Dimensions.popularFoodImgSize,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                     image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: AssetImage("assets/image/food_10.png"))),
+                        image: NetworkImage(product.img!))),
               )),
           // Icon widgets
           Positioned(
@@ -68,7 +71,7 @@ class PopularFoodDetail extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       AppColumn(
-                        text: "Chinese Side",
+                        text: product.name!,
                         fontSize: Dimensions.font26,
                         stars: 1,
                       ),
@@ -83,7 +86,7 @@ class PopularFoodDetail extends StatelessWidget {
                         child: SingleChildScrollView(
                           child: ExpandableTextWidget(
                               text:
-                                  "Chicken is a major worldwide source of meat and eggs for human consumption. It is prepared as food in a wide variety of ways, varying by region and culture. The prevalence of chickens is due to almost the entire chicken being edible, and the ease of raising them. The chicken domesticated for its meat are broilers and for its eggs are layers."),
+                                  product.description!),
                         ),
                       )
                     ],

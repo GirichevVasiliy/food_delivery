@@ -1,4 +1,5 @@
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/controllers/popular_product_controller.dart';
 import 'package:food_delivery/controllers/recommended_product_controller.dart';
@@ -57,11 +58,6 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               ? Container(
                   //color: Colors.red,
                   height: Dimensions.pageView,
-                  child: GestureDetector(
-                    onTap: (){
-                      Get.toNamed(RouteHelper.getPopularFood());
-                    },
-
                     child: PageView.builder(
                         controller: pageController,
                         itemCount: popularProduct.popularProductList.length,
@@ -70,7 +66,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                           return _buildPageItem(position,
                               popularProduct.popularProductList[position]);
                         }),
-                  ),
+
                 )
               : CircularProgressIndicator(
                   color: AppColors.mainColor,
@@ -130,82 +126,87 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   shrinkWrap: true,
                   itemCount: recommendedProduct.recommendedProductList.length, //Количество элементов
                   itemBuilder: (context, index) {
-                    return Container(
-                      margin: EdgeInsets.only(
-                          left: Dimensions.width20,
-                          right: Dimensions.width20,
-                          bottom: Dimensions.height10),
-                      child: Row(
-                        children: [
-                          // Картинка малая
-                          Container(
-                            width: Dimensions.listViewSize,
-                            height: Dimensions.listViewSize,
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(Dimensions.radius20),
-                              color: Colors.white38,
-                              image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: NetworkImage(recommendedProduct.recommendedProductList[index].img!)),
-                            ),
-                          ),
-                          // Текстовый контейнер
-                          Expanded(
-                            child: Container(
-                              height: Dimensions.listViewTextContSize,
+                    return GestureDetector(
+                      onTap: (){
+                        Get.toNamed(RouteHelper.getRecommendedFood());
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(
+                            left: Dimensions.width20,
+                            right: Dimensions.width20,
+                            bottom: Dimensions.height10),
+                        child: Row(
+                          children: [
+                            // Картинка малая
+                            Container(
+                              width: Dimensions.listViewSize,
+                              height: Dimensions.listViewSize,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                                  topRight:
-                                      Radius.circular(Dimensions.radius20),
-                                  bottomRight:
-                                      Radius.circular(Dimensions.radius20),
-                                ),
-                                color: Colors.white,
-                              ),
-                              child: Padding(
-                                padding: EdgeInsets.only(
-                                    left: Dimensions.width10,
-                                    right: Dimensions.width10),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    BigText(text: recommendedProduct.recommendedProductList[index].name!), // название блюда
-                                    SizedBox(
-                                      height: Dimensions.height10,
-                                    ),
-                                    ExpandableTextWidgetSmall(
-                                      text: recommendedProduct.recommendedProductList[index].description!, // свой виджет
-                                    ),
-                                    /*SmallText(
-                                        text: recommendedProduct.recommendedProductList[index].description!.toString().substring(0, 60)), // TODO: тут что то нужно другое*/
-                                    SizedBox(
-                                      height: Dimensions.height10,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment
-                                          .spaceBetween, // одинаковое расстояние
-                                      children: [
-                                        IconAndTextWidget(
-                                            icon: Icons.circle_sharp,
-                                            text: "Normal",
-                                            iconColor: AppColors.iconColor1),
-                                        IconAndTextWidget(
-                                            icon: Icons.location_on,
-                                            text: "1,7 km",
-                                            iconColor: AppColors.mainColor),
-                                        IconAndTextWidget(
-                                            icon: Icons.access_time_rounded,
-                                            text: "Fast",
-                                            iconColor: AppColors.iconColor2),
-                                      ],
-                                    )
-                                  ],
-                                ),
+                                borderRadius:
+                                    BorderRadius.circular(Dimensions.radius20),
+                                color: Colors.white38,
+                                image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: NetworkImage(recommendedProduct.recommendedProductList[index].img!)),
                               ),
                             ),
-                          )
-                        ],
+                            // Текстовый контейнер
+                            Expanded(
+                              child: Container(
+                                height: Dimensions.listViewTextContSize,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.only(
+                                    topRight:
+                                        Radius.circular(Dimensions.radius20),
+                                    bottomRight:
+                                        Radius.circular(Dimensions.radius20),
+                                  ),
+                                  color: Colors.white,
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                      left: Dimensions.width10,
+                                      right: Dimensions.width10),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      BigText(text: recommendedProduct.recommendedProductList[index].name!), // название блюда
+                                      SizedBox(
+                                        height: Dimensions.height10,
+                                      ),
+                                      ExpandableTextWidgetSmall(
+                                        text: recommendedProduct.recommendedProductList[index].description!, // свой виджет
+                                      ),
+                                      /*SmallText(
+                                          text: recommendedProduct.recommendedProductList[index].description!.toString().substring(0, 60)), // TODO: тут что то нужно другое*/
+                                      SizedBox(
+                                        height: Dimensions.height10,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment
+                                            .spaceBetween, // одинаковое расстояние
+                                        children: [
+                                          IconAndTextWidget(
+                                              icon: Icons.circle_sharp,
+                                              text: "Normal",
+                                              iconColor: AppColors.iconColor1),
+                                          IconAndTextWidget(
+                                              icon: Icons.location_on,
+                                              text: "1,7 km",
+                                              iconColor: AppColors.mainColor),
+                                          IconAndTextWidget(
+                                              icon: Icons.access_time_rounded,
+                                              text: "Fast",
+                                              iconColor: AppColors.iconColor2),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     );
                   })
@@ -244,22 +245,27 @@ class _FoodPageBodyState extends State<FoodPageBody> {
       matrix = Matrix4.diagonal3Values(1, currScale, 1)
         ..setTranslationRaw(0, _height * (1 - _scaleFactor) / 2, 1);
     }
-
+    // создаю популярный продукт для верхней карусели
     return Transform(
       transform: matrix,
       child: Stack(
         children: [
-          Container(
-            height: Dimensions.pageViewContainer,
-            margin: EdgeInsets.only(
-                left: Dimensions.width10, right: Dimensions.width10),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(Dimensions.radius30),
-                // закругление
-                color: index.isEven ? Color(0xFF69c5df) : Color(0xFF9294cc),
-                image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(popularProduct.img!))),
+          GestureDetector(
+            onTap: (){
+              Get.toNamed(RouteHelper.getPopularFood(index));
+            },
+            child: Container(
+              height: Dimensions.pageViewContainer,
+              margin: EdgeInsets.only(
+                  left: Dimensions.width10, right: Dimensions.width10),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(Dimensions.radius30),
+                  // закругление
+                  color: index.isEven ? Color(0xFF69c5df) : Color(0xFF9294cc),
+                  image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: NetworkImage(popularProduct.img!))),
+            ),
           ),
           Align(
             alignment: Alignment.bottomCenter,
