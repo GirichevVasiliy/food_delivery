@@ -2,10 +2,14 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/controllers/popular_product_controller.dart';
 import 'package:food_delivery/controllers/recommended_product_controller.dart';
+import 'package:food_delivery/pages/food/popular_food_detail.dart';
+import 'package:food_delivery/routes/route_helper.dart';
 import 'package:food_delivery/utils/colors.dart';
 import 'package:food_delivery/utils/dimensions.dart';
 import 'package:food_delivery/widgets/app_column.dart';
 import 'package:food_delivery/widgets/big_text.dart';
+import 'package:food_delivery/widgets/expandable_text.dart';
+import 'package:food_delivery/widgets/expandable_text_small.dart';
 import 'package:food_delivery/widgets/icon_and_text_widget.dart';
 import 'package:food_delivery/widgets/small_text.dart';
 import 'package:get/get.dart';
@@ -53,14 +57,20 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               ? Container(
                   //color: Colors.red,
                   height: Dimensions.pageView,
-                  child: PageView.builder(
-                      controller: pageController,
-                      itemCount: popularProduct.popularProductList.length,
-                      // количество элементов в карусели
-                      itemBuilder: (context, position) {
-                        return _buildPageItem(position,
-                            popularProduct.popularProductList[position]);
-                      }),
+                  child: GestureDetector(
+                    onTap: (){
+                      Get.toNamed(RouteHelper.getPopularFood());
+                    },
+
+                    child: PageView.builder(
+                        controller: pageController,
+                        itemCount: popularProduct.popularProductList.length,
+                        // количество элементов в карусели
+                        itemBuilder: (context, position) {
+                          return _buildPageItem(position,
+                              popularProduct.popularProductList[position]);
+                        }),
+                  ),
                 )
               : CircularProgressIndicator(
                   color: AppColors.mainColor,
@@ -160,12 +170,15 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    BigText(text: recommendedProduct.recommendedProductList[index].name!),
+                                    BigText(text: recommendedProduct.recommendedProductList[index].name!), // название блюда
                                     SizedBox(
                                       height: Dimensions.height10,
                                     ),
-                                    SmallText(
-                                        text: recommendedProduct.recommendedProductList[index].description!),
+                                    ExpandableTextWidgetSmall(
+                                      text: recommendedProduct.recommendedProductList[index].description!, // свой виджет
+                                    ),
+                                    /*SmallText(
+                                        text: recommendedProduct.recommendedProductList[index].description!.toString().substring(0, 60)), // TODO: тут что то нужно другое*/
                                     SizedBox(
                                       height: Dimensions.height10,
                                     ),
