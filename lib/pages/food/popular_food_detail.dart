@@ -12,8 +12,8 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 class PopularFoodDetail extends StatelessWidget {
-  int pageId;
-   PopularFoodDetail({super.key, required this.pageId});
+  final int pageId;
+   const PopularFoodDetail({super.key, required this.pageId});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class PopularFoodDetail extends StatelessWidget {
                 decoration: BoxDecoration(
                     image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: NetworkImage(product.img!))),
+                        image: NetworkImage(product.img!))), //Url Foto
               )),
           // Icon widgets
           Positioned(
@@ -78,7 +78,7 @@ class PopularFoodDetail extends StatelessWidget {
                       SizedBox(
                         height: Dimensions.height20,
                       ),
-                      BigText(text: "Introduce"),
+                      BigText(text: "Описание:"), // Introduce
                       SizedBox(
                         height: Dimensions.height10,
                       ),
@@ -86,7 +86,7 @@ class PopularFoodDetail extends StatelessWidget {
                         child: SingleChildScrollView(
                           child: ExpandableTextWidget(
                               text:
-                                  product.description!),
+                                  product.description!), // Описание блюда
                         ),
                       )
                     ],
@@ -149,11 +149,11 @@ class PopularFoodDetail extends StatelessWidget {
             Container(
               padding: EdgeInsets.only(
                   top: Dimensions.height20,
-                  bottom: Dimensions.height20,
+                  bottom: Dimensions.height15,
                   left: Dimensions.width20,
                   right: Dimensions.width20),
               child: BigText(
-                text: "\$10 | Add to cart",
+                text: "\₽ ${product.price!} | Добавить", // Add to cart
                 color: Colors.white,
                 size: Dimensions.font18,
               ),

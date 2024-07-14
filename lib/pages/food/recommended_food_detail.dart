@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:food_delivery/controllers/recommended_product_controller.dart';
 import 'package:food_delivery/routes/route_helper.dart';
 import 'package:food_delivery/utils/colors.dart';
 import 'package:food_delivery/utils/dimensions.dart';
@@ -9,10 +10,12 @@ import 'package:food_delivery/widgets/expandable_text.dart';
 import 'package:get/get.dart';
 
 class RecommendedFoodDetail extends StatelessWidget {
-  const RecommendedFoodDetail({super.key});
+  final int pageId;
+  const RecommendedFoodDetail({super.key, required this.pageId});
 
   @override
   Widget build(BuildContext context) {
+    var product = Get.find<RecommendedProductController>().recommendedProductList[pageId];
     return Scaffold(
       backgroundColor: Colors.white,
       body: CustomScrollView(
@@ -37,7 +40,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                 width: double.maxFinite,
                 child: Center(
                   child: BigText(
-                    text: "Chinese Side",
+                    text: product.name!, // Название блюда
                     size: Dimensions.font24,
                   ),
                 ),
@@ -54,8 +57,8 @@ class RecommendedFoodDetail extends StatelessWidget {
             backgroundColor: AppColors.yellowColor,
             expandedHeight: Dimensions.recommendedFoodImgSize,
             flexibleSpace: FlexibleSpaceBar(
-              background: Image.asset(
-                "assets/image/food_10.png",
+              background: Image.network(
+                product.img!, // url foto food
                 width: double.maxFinite,
                 fit: BoxFit.cover,
               ),
@@ -65,7 +68,7 @@ class RecommendedFoodDetail extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  child: ExpandableTextWidget(text: "Chicken is a major worldwide source of meat and eggs for human consumption. It is prepared as food in a wide variety of ways, varying by region and culture. The prevalence of chickens is due to almost the entire chicken being edible, and the ease of raising them. The chicken domesticated for its meat are broilers and for its eggs are layers.Chicken is a major worldwide source of meat and eggs for human consumption. Chicken is a major worldwide source of meat and eggs for human consumption. It is prepared as food in a wide variety of ways, varying by region and culture. The prevalence of chickens is due to almost the entire chicken being edible, and the ease of raising them. The chicken domesticated for its meat are broilers and for its eggs are layers.Chicken is a major worldwide source of meat and eggs for human consumption. Chicken is a major worldwide source of meat and eggs for human consumption. It is prepared as food in a wide variety of ways, varying by region and culture. The prevalence of chickens is due to almost the entire chicken being edible, and the ease of raising them. The chicken domesticated for its meat are broilers and for its eggs are layers.Chicken is a major worldwide source of meat and eggs for human consumption. Chicken is a major worldwide source of meat and eggs for human consumption. It is prepared as food in a wide variety of ways, varying by region and culture. The prevalence of chickens is due to almost the entire chicken being edible, and the ease of raising them. The chicken domesticated for its meat are broilers and for its eggs are layers.Chicken is a major worldwide source of meat and eggs for human consumption.Chicken is a major worldwide source of meat and eggs for human consumption. It is prepared as food in a wide variety of ways, varying by region and culture. The prevalence of chickens is due to almost the entire chicken being edible, and the ease of raising them. The chicken domesticated for its meat are broilers and for its eggs are layers.Chicken is a major worldwide source of meat and eggs for human consumption. Chicken is a major worldwide source of meat and eggs for human consumption. It is prepared as food in a wide variety of ways, varying by region and culture. The prevalence of chickens is due to almost the entire chicken being edible, and the ease of raising them. The chicken domesticated for its meat are broilers and for its eggs are layers.Chicken is a major worldwide source of meat and eggs for human consumption.",),
+                  child: ExpandableTextWidget(text: product.description!), // Описание
                   margin: EdgeInsets.only(left: Dimensions.width20, right: Dimensions.width20),
                 )
               ],
@@ -86,7 +89,7 @@ class RecommendedFoodDetail extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 AppIcon(iconSize: Dimensions.iconSize24, iconColor: Colors.white, backgroundColor: AppColors.mainColor,icon: Icons.remove),
-                BigText(text: "\$12.88" + " X " + "0", color: AppColors.mainBlackColor, size: Dimensions.font26,),
+                BigText(text: "\₽ ${product.price!} X 0", color: AppColors.mainBlackColor, size: Dimensions.font26,),
                 AppIcon(iconSize: Dimensions.iconSize24, iconColor: Colors.white, backgroundColor: AppColors.mainColor, icon: Icons.add),
               ],
             ),
@@ -127,11 +130,11 @@ class RecommendedFoodDetail extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.only(
                       top: Dimensions.height20,
-                      bottom: Dimensions.height20,
+                      bottom: Dimensions.height15,
                       left: Dimensions.width20,
                       right: Dimensions.width20),
                   child: BigText(
-                    text: "\$10 | Add to cart",
+                    text: "\₽ 10 | Добавить", // Add to cart,
                     color: Colors.white,
                     size: Dimensions.font18,
                   ),
