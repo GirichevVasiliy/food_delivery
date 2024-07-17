@@ -177,10 +177,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                                       ExpandableTextWidgetSmall(
                                         text: recommendedProduct.recommendedProductList[index].description!, // свой виджет
                                       ),
-                                      /*SmallText(
-                                          text: recommendedProduct.recommendedProductList[index].description!.toString().substring(0, 60)), // TODO: тут что то нужно другое*/
                                       SizedBox(
-                                        height: Dimensions.height10,
+                                        height: Dimensions.height15,
                                       ),
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment

@@ -2,56 +2,50 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/utils/colors.dart';
 import 'package:food_delivery/utils/dimensions.dart';
 import 'package:food_delivery/widgets/small_text.dart';
-
-class ExpandableTextWidgetSmall extends StatefulWidget {
+class ExpandableTextWidgetSmall extends StatelessWidget {
   final String text;
 
   const ExpandableTextWidgetSmall({super.key, required this.text});
 
   @override
-  State<ExpandableTextWidgetSmall> createState() => _ExpandableTextWidgetStateSmall();
+  Widget build(BuildContext context) {
+    return Container(
+
+      child: OneLineText(
+        text: text,
+        size: Dimensions.font14,
+        color: AppColors.paraColor,
+      ),
+    );
+  }
 }
 
-class _ExpandableTextWidgetStateSmall extends State<ExpandableTextWidgetSmall> {
-  late String firstHalf;
-  late String secondHalf;
-  bool hiddenText = true; // скрытый текст
-  double textHeight = 60; // размер текста.
+class OneLineText extends StatelessWidget {
+  final String text;
+  final Color color;
+  final double size;
+  final double height;
 
-  @override
-  void initState() {
-    super.initState();
-    /* Есть описание блюда и если длинна текста больше чем textHeight,
- * к примеру 60 символов, то все что до 60 мы поместим в firstHalf,
- * а остаток теста в secondHalf. Если текст помещается в 200 символов, то
- * все запишем в firstHalf, а в secondHalf, так как переменные late мы должны что то
- * записать, запишем "".
- * */
-    if (widget.text.length > textHeight) {
-      firstHalf = widget.text.substring(0, textHeight.toInt());
-      secondHalf =
-          widget.text.substring(textHeight.toInt() + 1, widget.text.length);
-    } else {
-      firstHalf = widget.text;
-      secondHalf = "";
-    }
-  }
+  OneLineText({
+    Key? key,
+    required this.text,
+    this.color = const Color(0xFF332d2d),
+    this.size = 0,
+    this.height = 1.2,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: secondHalf.isEmpty ? SmallText(size: Dimensions.font12, text: firstHalf,
-        color: AppColors.paraColor,) : Column(
-              children: [
-                SmallText(
-                    text: hiddenText
-                        ? (firstHalf + "...")
-                        : (firstHalf + secondHalf),
-                    size: Dimensions.font12,
-                height: Dimensions.height1_5,
-                  color: AppColors.paraColor,),
-              ],
-            ),
+    return Text(
+      text,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        fontFamily: 'Roboto',
+        color: color,
+        fontSize: size == 0 ? Dimensions.font12 : size,
+        height: height,
+      ),
+      maxLines: 1,
     );
   }
 }
